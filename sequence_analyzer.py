@@ -1,10 +1,9 @@
 from Bio import SeqIO
-import sys
-import os
+from Bio.Seq import Seq
 from collections import Counter
 import matplotlib.pyplot as plt 
 import re
-
+import random
 
 class SequenceAnalyzer:
     def __init__(self, file_path):
@@ -99,6 +98,17 @@ class SequenceAnalyzer:
          else: print(f"Skipping {record.id}: Invalid sequence")
       return translations
     
+    def point_mutation(self, sequence_id, position, new_base):
+        """Manually changes one base at a specific index."""
+        # import pdb; pdb.set_trace()
+        target_record = next(record for record in self.records if record.id == sequence_id)
+        base_lst = list(target_record.seq)
+        base_lst[position] = new_base
+        new_seq = "".join(base_lst)
+        target_record.seq = Seq(new_seq)
+        return new_seq
+        
+        
        
 if __name__ == "__main__":
     analyzer = SequenceAnalyzer("data/TP53seq.fasta")
