@@ -21,7 +21,7 @@ pip install biopython matplotlib
 from sequence_analyzer import SequenceAnalyzer
 
 # Initialize the analyzer with a FASTA file
-analyzer = SequenceAnalyzer("your_data.fasta")
+analyzer = SequenceAnalyzer("data/your_data.fasta")
 
 # Generate a GC content bar chart
 analyzer.plot_gc_content()
