@@ -9,6 +9,15 @@ SequenceAnalyzer is a robust, object-oriented Python library designed to automat
 - **Protein Translation:** Leverages Biopython's high-performance translation engine to convert DNA to Amino Acid sequences.
 - **Type-Safe & Documented:** Fully implemented with Python type hints and descriptive docstrings for professional-grade readability.
 
+## 🧬 Data Sources
+The example data provided in the `data/` directory is sourced from the **NCBI (National Center for Biotechnology Information)** Nucleotide database. 
+
+* **NCBI Reference:** [NCBI Nucleotide Database](https://www.ncbi.nlm.nih.gov/nucleotide/)
+* **Included Genes:**
+  * **TP53:** A critical tumor suppressor gene often referred to as the "guardian of the genome."
+  * **BRCA1:** A gene involved in DNA repair; mutations are significantly linked to hereditary breast and ovarian cancer risks.
+* **Format:** Data is stored in standard FASTA format, containing raw nucleotide sequences for analysis.
+
 ## 🛠️ Installation
 To use this tool, you will need Python 3.x and the following libraries:
 
