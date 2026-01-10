@@ -100,13 +100,8 @@ class SequenceAnalyzer:
       return translations
     
        
-
-# -------------------------------------------------------------------------
-# EXECUTION BLOCK
-# -------------------------------------------------------------------------
 if __name__ == "__main__":
-    # Once refactored, your main execution will look like this:
-    analyzer = SequenceAnalyzer("TP53seq.fasta")
+    analyzer = SequenceAnalyzer("data/TP53seq.fasta")
     analyzer.plot_gc_content()
     print(analyzer.dna_to_protein())
     print(analyzer.codon_usage())
