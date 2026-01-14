@@ -100,14 +100,31 @@ class SequenceAnalyzer:
     
     def point_mutation(self, sequence_id, position, new_base):
         """Manually changes one base at a specific index."""
-        # import pdb; pdb.set_trace()
         target_record = next(record for record in self.records if record.id == sequence_id)
         base_lst = list(target_record.seq)
         base_lst[position] = new_base
         new_seq = "".join(base_lst)
         target_record.seq = Seq(new_seq)
         return new_seq
-        
+    
+
+    def simulate_random_mutation(self, sequence_id):
+        """Randomly swaps one base to see the effect on the protein."""
+        target_record = next(record for record in self.records if record.id == sequence_id)
+        position = random.randrange(0, len(target_record.seq))
+        base_lst = list(target_record.seq)
+        new_base = ""
+        bases = ['A','G','T','C']
+        while new_base == "":
+           temp_base = random.choice(bases)
+           if temp_base != base_lst[position]:
+              new_base = temp_base
+           else: continue
+        base_lst[position] = new_base
+        new_seq = "".join(base_lst)
+        target_record.seq = Seq(new_seq)
+        return new_seq
+    
         
        
 if __name__ == "__main__":
@@ -115,3 +132,4 @@ if __name__ == "__main__":
     analyzer.plot_gc_content()
     print(analyzer.dna_to_protein())
     print(analyzer.codon_usage())
+    print(analyzer.simulate_random_mutation("MP007459.1"))
