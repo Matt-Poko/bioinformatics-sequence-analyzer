@@ -8,7 +8,9 @@ from src import SequenceAnalyzer
 
 @pytest.fixture
 def sequence_analyzer():
-  return SequenceAnalyzer('data/TP53seq.fasta')
+  test_dir = os.path.dirname(os.path.abspath(__file__))
+  data_path = os.path.join(test_dir, 'sample.fasta')
+  return SequenceAnalyzer(data_path)
 
 class TestValidateSequence:
   def test_validate_sequence(self, sequence_analyzer):
