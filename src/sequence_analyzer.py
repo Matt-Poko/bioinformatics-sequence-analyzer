@@ -2,7 +2,6 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from collections import Counter
 import matplotlib.pyplot as plt 
-import re
 import random
 
 class SequenceAnalyzer:
@@ -17,8 +16,6 @@ class SequenceAnalyzer:
         self.file_name = file_path.split('.')[0]
 
     def get_codons(self, sequence_id):
-        target_record = next(record for record in self.records if record.id == sequence_id)
-        sequence = target_record.seq
         """
         Slices a DNA string into a list of 3-character codons.
 
@@ -28,10 +25,12 @@ class SequenceAnalyzer:
         Returns:
             List[str]: A list of triplet codons.
         """
-        #List comprehension for dummies: Slice the string (Sequence) from including i up to but not including i+3 then the i is iterated from 0 up to the length of the string
-        #The range operator also has an optional parameter "step" that will change how much the i jumps per round. I.E. round 1 i=0 slice [0:4] then next round i=3 slice [3:7]
-        # len(sequence) - 2 to avoid a codon < 3
-        return [sequence[i:i+3] for i in range(0, len(sequence) - 2 ,3)]
+        target_record = next(record for record in self.records if record.id == sequence_id)
+        sequence = target_record.seq
+        if self.validate_sequence(sequence):
+            return [sequence[i:i+3] for i in range(0, len(sequence) - 2 ,3)]
+        else: print(f"Skipping {target_record.id}: Invalid sequence")
+        
 
     def validate_sequence(self, sequence):
         """
@@ -44,8 +43,8 @@ class SequenceAnalyzer:
             bool: True if valid, False if it contains unknown characters.
         """
         sequence = str(sequence)
-        matches = re.search(r'[^ATCG]', sequence)
-        if matches: return False
+        allowed = set("ATCG")
+        if not set(sequence) <= allowed: return False
         else: return True
 
     def plot_gc_content(self, file_name=None):
