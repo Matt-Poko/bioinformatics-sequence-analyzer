@@ -43,6 +43,7 @@ class SequenceAnalyzer:
             bool: True if valid, False if it contains unknown characters.
         """
         sequence = str(sequence)
+        sequence = sequence.strip().upper()
         allowed = set("ATCG")
         if not set(sequence) <= allowed: return False
         else: return True
